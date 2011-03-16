@@ -30,8 +30,6 @@ a protocol buffer message:
 
 ## Parse a message
 
-#!/usr/bin/env ruby
-
     require 'addressbook.pb'
     require 'protojson'
 
