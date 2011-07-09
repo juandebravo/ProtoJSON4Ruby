@@ -3,13 +3,13 @@ $:.push File.expand_path("../lib", __FILE__)
 require "protojson/version"
 
 Gem::Specification.new do |s|
-  s.name        = "protojson"
-  s.version     = Protojson::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Juan de Bravo", "Ivan -DrSlump- Montes"]
-  s.email       = ["juandebravo@gmail.com", "drslump@pollinimini.net"]
-  s.homepage    = ""
-  s.summary     = %q{Ruby extension to ruby-protobuf to enable three new encodings}
+  s.name = "protojson"
+  s.version = Protojson::VERSION
+  s.platform = Gem::Platform::RUBY
+  s.authors = ["Juan de Bravo", "Ivan -DrSlump- Montes"]
+  s.email = ["juandebravo@gmail.com", "drslump@pollinimini.net"]
+  s.homepage = ""
+  s.summary = %q{Ruby extension to ruby-protobuf to enable three new encodings}
   s.description = %q{A Ruby gem for Google's Protocol Buffers messages using three different encodings JSON
                     based syntax instead of the original binary protocol. Supported formats
 
@@ -25,10 +25,17 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "protojson"
 
-  s.files         = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n")
   s.files.delete("Gemfile.lock")
   s.files.delete(".gitignore")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_dependency('ruby_protobuf', '~>0.4.10')
+  s.add_dependency('activesupport', '~>3.0.5')
+  s.add_dependency('i18n', '~>0.5.0')
+
+  s.add_development_dependency("rspec")
+
 end

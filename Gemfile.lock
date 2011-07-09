@@ -1,20 +1,30 @@
 PATH
   remote: .
   specs:
-    protojson (0.0.1)
+    protojson (0.2.0)
+      activesupport (~> 3.0.5)
+      i18n (~> 0.5.0)
+      ruby_protobuf (~> 0.4.10)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.0.5)
+    activesupport (3.0.9)
+    diff-lcs (1.1.2)
     i18n (0.5.0)
-    ruby_protobuf (0.4.10)
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.1)
+    rspec-expectations (2.5.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.5.0)
+    ruby_protobuf (0.4.11)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (~> 3.0.5)
-  i18n (~> 0.5.0)
   protojson!
-  ruby_protobuf (= 0.4.10)
+  rspec
