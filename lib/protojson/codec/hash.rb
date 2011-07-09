@@ -73,6 +73,46 @@ module Protojson
           end
           result
         end
+
+        # This method parses a JSON encoded message to the message object
+        def decode(message, data, decoding_key = :name)
+
+          message = message.new
+
+          # per each hash element:
+          data.each_pair { |key, value|
+            key = decoding_key.eql?(:tag) ? key.to_i : key.to_s
+
+            #  get the field object using the key (field tag)
+            #field = message.get_field_by_tag(key.to_i)
+            field = message.send("get_field_by_#{decoding_key}".to_sym, key)
+
+            if field.nil?
+              # ignore unknown field
+            elsif field.repeated?
+              # create the element
+              array = message.__send__(field.name)
+              value.each { |val|
+              # if value is a complex field, create the object and parse the content
+                if field.is_a?(Protobuf::Field::MessageField)
+                  instance = field.type
+                  val = decode(instance, val, decoding_key)
+                end
+                # include each element in the parent element field
+                array.push(val)
+              }
+            else
+              # if value is a complex field, create the object and parse the content
+              if field.is_a?(Protobuf::Field::MessageField)
+                instance = field.type
+                value = decode(instance, value, decoding_key)
+              end
+              # set the message field
+              message.__send__("#{field.name}=", value)
+            end
+          }
+          message
+        end
       end
     end
   end

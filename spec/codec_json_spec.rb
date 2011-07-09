@@ -138,7 +138,14 @@ describe Protojson::Codec::Json do
             }
 END
 
-      Protojson.encode(book).should eql(expected.gsub(/\n\s*/,''))
+      encoded = Protojson.encode(book)
+      encoded.should eql(expected.gsub(/\n\s*/, ''))
+      decoded = Protojson.decode(Examples::AddressBook, encoded)
+      decoded.person.length.should eql 3
+      decoded.person[0].name.should eql "John Doe"
+      decoded.person[1].name.should eql "Ivan Montes"
+      decoded.person[2].name.should eql "Juan de Bravo"
+      decoded.person[0].phone[1].number.should eql "55512321312"
     end
 
   end

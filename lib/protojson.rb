@@ -70,6 +70,12 @@ module Protojson
       codec = self.[] # fetch default codec
       codec.encode(message)
     end
+
+    def decode(message, data)
+      codec = self.[] # fetch default codec
+      codec.decode(message, data)
+    end
+
   end
 
 end
