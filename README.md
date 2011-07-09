@@ -12,7 +12,7 @@ This gem extends the *ruby_protobuf* gem [1] to allow these new encodings in a p
 
 # Installation
 
-    gem install protojson
+    gem install protojson -v0.2.0
 
 # Supported formats
 
@@ -30,32 +30,28 @@ as a string, where each character represents a tag, and placing it as the first 
 
 ## Serialize a message
 
-    require 'addressbook.pb'
+
     require 'protojson'
-    person = Tutorial::Person.new
-    person.parse_from_file ARGV[0]
+    require 'examples/addressbook.rb'
 
-    Protobuf::Message::encoding = Protobuf::Message::EncodingType::INDEXED
+    book = Examples::AddressBook.new
 
-    value = person.serialize_to_string
+    person = Examples::Person.new
+    person.name = 'Juan de Bravo'
+    person.id = 21
+    book.person << person
 
-    puts value
+    # default codec
+    data = Protojson.encode(book)
 
-## Parse a message
+    # specific codec
+    [:json, :tagmap, :indexed].each{|codec|
+        Protojson.encode(book, codec)
+    }
 
-    require 'addressbook.pb'
-    require 'protojson'
+    # decode
 
-    person = Tutorial::Person.new
-    person.parse_from_file ARGV[0]
+    value = Protojson.decode(Examples::AddressBook, data)
+    puts value.person[0].name # "Juan de Bravo"
 
-    Protobuf::Message::encoding = Protobuf::Message::EncodingType::INDEXED
-
-    value = person.serialize_to_string
-
-    person = Tutorial::Person.new
-
-    person.parse_from_string(value)
-
-    p person
 
