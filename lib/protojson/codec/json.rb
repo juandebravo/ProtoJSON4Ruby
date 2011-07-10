@@ -5,15 +5,18 @@ require 'protojson/codec/codec_interface'
 module Protojson
   module Codec
     class Json
-      include Protojson::Codec::CodecInterface
+      extend Protojson::Codec::CodecInterface
 
-      def encode(message)
-        Protojson::Codec::Hash.encode(message).to_json
-      end
+      class << self
 
-      def decode(message, data)
-        data.is_a?(String) and data = ActiveSupport::JSON.decode(data)
-        Protojson::Codec::Hash.decode(message, data)
+        def encode(message)
+          Protojson::Codec::Hash.encode(message).to_json
+        end
+
+        def decode(message, data)
+          data.is_a?(String) and data = ActiveSupport::JSON.decode(data)
+          Protojson::Codec::Hash.decode(message, data)
+        end
       end
 
     end

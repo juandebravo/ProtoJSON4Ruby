@@ -1,5 +1,3 @@
-require 'protobuf/message/message'
-require 'extensions/protobuf/message'
 
 %W(binary json hash json_indexed json_tag_map).each { |codec|
   require "protojson/codec/#{codec}"
@@ -47,10 +45,10 @@ module Protojson
         h[nil] = Protojson::Codec::Binary
       }
       # default value is Binary codec
-      h[nil] = Protojson::Codec::Binary.new
-      h[:json] = Protojson::Codec::Json.new
-      h[:indexed] = Protojson::Codec::JsonIndexed.new
-      h[:tag_map] = Protojson::Codec::JsonTagMap.new
+      h[nil] = Protojson::Codec::Binary
+      h[:json] = Protojson::Codec::Json
+      h[:indexed] = Protojson::Codec::JsonIndexed
+      h[:tag_map] = Protojson::Codec::JsonTagMap
       h
       )
     end

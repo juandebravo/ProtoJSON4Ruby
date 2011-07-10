@@ -11,7 +11,7 @@ require 'addressbook.pb'
 
 describe Protojson::Codec::Json do
   before(:all) do
-    Protojson.set_default_codec(Protojson::Codec::Json.new)
+    Protojson.set_default_codec(Protojson::Codec::Json)
   end
 
   context "simple message" do

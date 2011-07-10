@@ -11,7 +11,7 @@ require 'addressbook.pb'
 
 describe Protojson::Codec::JsonTagMap do
   before(:all) do
-    Protojson.set_default_codec(Protojson::Codec::JsonIndexed.new)
+    Protojson.set_default_codec(Protojson::Codec::JsonIndexed)
   end
 
   context "simple message" do
