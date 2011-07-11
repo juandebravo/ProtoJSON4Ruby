@@ -1,4 +1,3 @@
-
 %W(binary json hash json_indexed json_tag_map).each { |codec|
   require "protojson/codec/#{codec}"
 }
@@ -72,8 +71,8 @@ module Protojson
       codec.encode(message)
     end
 
-    def decode(message, data)
-      codec = self.[] # fetch default codec
+    def decode(message, data, codec)
+      codec = send("[]".to_sym, codec) # fetch default codec if none given
       codec.decode(message, data)
     end
 
