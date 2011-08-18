@@ -1,13 +1,13 @@
 # -*- coding: UTF-8 -*-
 
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-$:.unshift File.join(File.dirname(__FILE__), '..', 'examples')
+#$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+$:.unshift File.join(File.dirname(__FILE__), '..')
 
 require 'protojson'
 
-require 'simple.pb'
-require 'repeated.pb'
-require 'addressbook.pb'
+require 'examples/simple.pb'
+require 'examples/repeated.pb'
+require 'examples/addressbook.pb'
 
 describe Protojson::Codec::Binary do
   before(:all) do
