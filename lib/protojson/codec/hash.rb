@@ -5,6 +5,8 @@ require 'protobuf/message/enum'
 module Protojson
   module Codec
     class Hash
+      extend Protojson::Codec::CodecInterface
+
       class << self
 
         # Encode the message to a hash object defined as a collection for key/values
