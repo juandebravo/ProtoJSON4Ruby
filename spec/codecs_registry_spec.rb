@@ -7,7 +7,7 @@ describe Protojson do
   context "initialize with default behavior" do
 
     it "should have the default codecs when initialized" do
-      Protojson.codecs.length.should eql(4)
+      Protojson.codecs.length.should eql(5)
     end
 
     it 'should get a default codec if none set' do

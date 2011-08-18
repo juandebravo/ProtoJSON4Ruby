@@ -31,7 +31,8 @@ module Protojson
     # Returns the codec specified or the default one if no attribute is defined
     def [](codec = nil)
       codec.is_a?(Protojson::Codec::CodecInterface) and return codec
-      codecs[codec]
+      codec.is_a?(Symbol) or codec.nil? and return codecs[codec]
+      raise "Invalid codec #{codec}. It should either implement Protojson::Codec::CodecInterface or be a symbol"
     end
 
     # Initializes the codecs Hash
@@ -45,8 +46,9 @@ module Protojson
       }
       # default value is Binary codec
       h[nil] = Protojson::Codec::Binary
-      h[:json] = Protojson::Codec::Json
+      h[:hash] = Protojson::Codec::Hash
       h[:indexed] = Protojson::Codec::JsonIndexed
+      h[:json] = Protojson::Codec::Json
       h[:tag_map] = Protojson::Codec::JsonTagMap
       h
       )
@@ -59,6 +61,7 @@ module Protojson
       end
 
       # set default codec
+      puts codec.is_a?(Protojson::Codec::CodecInterface)
       if codec.is_a?(Protojson::Codec::CodecInterface)
         codecs[nil] = codec
       else
@@ -71,7 +74,7 @@ module Protojson
       codec.encode(message)
     end
 
-    def decode(message, data, codec)
+    def decode(message, data, codec = nil)
       codec = send("[]".to_sym, codec) # fetch default codec if none given
       codec.decode(message, data)
     end
