@@ -1,6 +1,5 @@
 require 'bundler'
 require 'rspec/core/rake_task'
-require 'rake/rdoctask'
 require 'rake/clean'
 
 Bundler::GemHelper.install_tasks
@@ -16,7 +15,7 @@ end
 desc "Show the different encodings using a test file"
 namespace :test do
   task :person do
-    sh "ruby spec/main.rb spec/person"
+    sh "ruby examples/main.rb examples/person"
   end
 end
 

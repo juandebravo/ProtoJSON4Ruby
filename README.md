@@ -41,17 +41,19 @@ as a string, where each character represents a tag, and placing it as the first 
     person.id = 21
     book.person << person
 
-    # default codec
+### Serialize using the default codec (binary)
+
     data = Protojson.encode(book)
 
-    # specific codec
+### Serialize using a specific codec
+
     [:json, :tagmap, :indexed].each{|codec|
         Protojson.encode(book, codec)
     }
 
-    # decode
+## Unserialize a message
 
-    value = Protojson.decode(Examples::AddressBook, data)
+    value = Protojson.decode(Examples::AddressBook, data, :json)
     puts value.person[0].name # "Juan de Bravo"
 
 
