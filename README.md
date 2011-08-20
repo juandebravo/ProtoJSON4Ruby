@@ -53,7 +53,14 @@ as a string, where each character represents a tag, and placing it as the first 
 
 ## Unserialize a message
 
+### Unserialize using a specific codec
+    data = Protojson.encode(book, :json)
     value = Protojson.decode(Examples::AddressBook, data, :json)
     puts value.person[0].name # "Juan de Bravo"
 
+### Unserialize using the default codec
+    Protojson.set_default_codec(:json)
+    data = Protojson.encode(book)
+    value = Protojson.decode(Examples::AddressBook, data)
+    puts value.person[0].name # "Juan de Bravo"
 
