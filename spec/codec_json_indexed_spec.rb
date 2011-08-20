@@ -24,7 +24,8 @@ describe Protojson::Codec::JsonTagMap do
     end
 
     it "should encode properly when two required attributes provided" do
-      @encoded.to_s.should eql('["12", "Foo", 1000]')
+      @encoded.should be_instance_of(String)
+      @encoded.should eql('["12", "Foo", 1000]')
     end
 
     it "should decode properly" do
@@ -46,7 +47,8 @@ describe Protojson::Codec::JsonTagMap do
     end
 
     it "should encode properly when two required attributes and one optional attribute provided" do
-      @encoded.to_s.should eql('["123", "Foo", 1000, "Bazz"]')
+      @encoded.should be_instance_of(String)
+      @encoded.should eql('["123", "Foo", 1000, "Bazz"]')
     end
 
     it "should decode properly" do
@@ -65,7 +67,9 @@ describe Protojson::Codec::JsonTagMap do
       repeated.string << "one"
       repeated.string << "two"
       repeated.string << "three"
-      Protojson.encode(repeated).to_s.should eql('["1", ["one", "two", "three"]]')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('["1", ["one", "two", "three"]]')
     end
 
     it "should encode properly when the int field has more than one value" do
@@ -73,7 +77,9 @@ describe Protojson::Codec::JsonTagMap do
       repeated.int << 1
       repeated.int << 2
       repeated.int << 3
-      Protojson.encode(repeated).to_s.should eql('["2", [1, 2, 3]]')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('["2", [1, 2, 3]]')
     end
 
     it "should encode properly when both int and string fields has more than one value" do
@@ -84,7 +90,9 @@ describe Protojson::Codec::JsonTagMap do
       repeated.int << 1
       repeated.int << 2
       repeated.int << 3
-      Protojson.encode(repeated).to_s.should eql('["12", ["one", "two", "three"], [1, 2, 3]]')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('["12", ["one", "two", "three"], [1, 2, 3]]')
     end
 
     it "should encode properly when the nested field has more than one value" do
@@ -94,7 +102,9 @@ describe Protojson::Codec::JsonTagMap do
         nested.id = id
         repeated.nested << nested
       }
-      Protojson.encode(repeated).to_s.should eql('["3", [["1", 1], ["1", 2], ["1", 3]]]')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('["3", [["1", 1], ["1", 2], ["1", 3]]]')
     end
 
   end

@@ -20,7 +20,9 @@ describe Protojson::Codec::Json do
       simple = Examples::Simple.new
       simple.foo = "Foo"
       simple.bar = 1000
-      Protojson.encode(simple).should eql('{"foo":"Foo","bar":1000}')
+      value = Protojson.encode(simple)
+      value.should be_instance_of(String)
+      value.should eql('{"foo":"Foo","bar":1000}')
     end
 
     it "should encode properly when two required attributes and one optional attribute provided" do
@@ -28,7 +30,9 @@ describe Protojson::Codec::Json do
       simple.foo = "Foo"
       simple.bar = 1000
       simple.baz = "Bazz"
-      Protojson.encode(simple).should eql('{"foo":"Foo","bar":1000,"baz":"Bazz"}')
+      value = Protojson.encode(simple)
+      value.should be_instance_of(String)
+      value.should eql('{"foo":"Foo","bar":1000,"baz":"Bazz"}')
     end
   end
 
@@ -39,7 +43,9 @@ describe Protojson::Codec::Json do
       repeated.string << "one"
       repeated.string << "two"
       repeated.string << "three"
-      Protojson.encode(repeated).should eql('{"string":["one","two","three"]}')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('{"string":["one","two","three"]}')
     end
 
     it "should encode properly when the int field has more than one value" do
@@ -47,7 +53,8 @@ describe Protojson::Codec::Json do
       repeated.int << 1
       repeated.int << 2
       repeated.int << 3
-      Protojson.encode(repeated).should eql('{"int":[1,2,3]}')
+      value = Protojson.encode(repeated)
+      value.should eql('{"int":[1,2,3]}')
     end
 
     it "should encode properly when both int and string fields has more than one value" do
@@ -58,7 +65,9 @@ describe Protojson::Codec::Json do
       repeated.int << 1
       repeated.int << 2
       repeated.int << 3
-      Protojson.encode(repeated).should eql('{"string":["one","two","three"],"int":[1,2,3]}')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('{"string":["one","two","three"],"int":[1,2,3]}')
     end
 
     it "should encode properly when the nested field has more than one value" do
@@ -68,7 +77,9 @@ describe Protojson::Codec::Json do
         nested.id = id
         repeated.nested << nested
       }
-      Protojson.encode(repeated).should eql('{"nested":[{"id":1},{"id":2},{"id":3}]}')
+      value = Protojson.encode(repeated)
+      value.should be_instance_of(String)
+      value.should eql('{"nested":[{"id":1},{"id":2},{"id":3}]}')
     end
 
   end
@@ -139,6 +150,7 @@ describe Protojson::Codec::Json do
 END
 
       encoded = Protojson.encode(book)
+      encoded.should be_instance_of(String)
       encoded.should eql(expected.gsub(/\n\s*/, ''))
       decoded = Protojson.decode(Examples::AddressBook, encoded)
       decoded.person.length.should eql 3

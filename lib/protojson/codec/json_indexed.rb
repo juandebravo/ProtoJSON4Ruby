@@ -11,7 +11,7 @@ module Protojson
 
         def encode(message)
           data = Protojson::Codec::Hash.encode(message, :tag)
-          serialize_hash_to_indexed(data)
+          serialize_hash_to_indexed(data).to_s
         end
 
         def decode(message, data)
