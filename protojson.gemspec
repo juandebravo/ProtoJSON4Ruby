@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('ruby_protobuf', '~>0.4.10')
   s.add_dependency('activesupport', '~>3.1.0.rc6')
-  s.add_dependency('i18n', '~>0.5.0')
+  s.add_dependency('i18n', '~>0.6.0')
 
   s.add_development_dependency("rspec")
 
